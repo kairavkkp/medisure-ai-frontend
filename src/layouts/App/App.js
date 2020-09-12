@@ -21,7 +21,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 
 // core components
-import AdminNavbar from "components/Navbars/AdminNavbar.js";
+import AppNavbar from "components/Navbars/AppNavbar.js";
 import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
@@ -32,7 +32,7 @@ import logo from "assets/img/react-logo.png";
 
 var ps;
 
-class Admin extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -78,9 +78,10 @@ class Admin extends React.Component {
     this.setState({ sidebarOpened: !this.state.sidebarOpened });
   };
   getRoutes = routes => {
+    console.log("Routes", routes);
     return routes.map((prop, key) => {
       console.log(prop.layout);
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/app") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -118,7 +119,7 @@ class Admin extends React.Component {
             bgColor={this.state.backgroundColor}
             logo={{
               outterLink: "https://www.creative-tim.com/",
-              text: "Creative Tim",
+              text: "PennApps Project",
               imgSrc: logo
             }}
             toggleSidebar={this.toggleSidebar}
@@ -128,7 +129,7 @@ class Admin extends React.Component {
             ref="mainPanel"
             data={this.state.backgroundColor}
           >
-            <AdminNavbar
+            <AppNavbar
               {...this.props}
               brandText={this.getBrandText(this.props.location.pathname)}
               toggleSidebar={this.toggleSidebar}
@@ -136,7 +137,6 @@ class Admin extends React.Component {
             />
             <Switch>
               {this.getRoutes(routes)}
-              <Redirect from="*" to="/admin/dashboard"/>
             </Switch>
             {// we don't want the Footer to be rendered on map page
             this.props.location.pathname.indexOf("maps") !== -1 ? null : (
@@ -153,4 +153,4 @@ class Admin extends React.Component {
   }
 }
 
-export default Admin;
+export default App;
