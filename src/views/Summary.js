@@ -16,11 +16,6 @@
 
 */
 import React from "react"
-// nodejs library that concatenates classes
-import classNames from "classnames"
-// react plugin used to create charts
-import { Line, Bar } from "react-chartjs-2"
-import { useDropzone } from "react-dropzone"
 
 // reactstrap components
 import {
@@ -41,91 +36,140 @@ import {
   Col,
   UncontrolledTooltip,
   FormGroup,
-  Form
+  Form,
+  FormText,
+  CardDeck,
 } from "reactstrap"
 
-// core components
-import {
-  chartExample1,
-  chartExample2,
-  chartExample3,
-  chartExample4,
-} from "variables/charts.js"
-
-function Basic(props) {
-  const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
-  
-  const files = acceptedFiles.map(file => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ));
-
-  return (
-    <section className="container" lg="4">
-      <div {...getRootProps({className: 'dropzone'})}>
-        <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
-      </div>
-      <aside>
-        <h4>Files</h4>
-        <ul>{files}</ul>
-      </aside>
-    </section>
-  );
-}
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons"
 
 class Home extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      bigChartData: "data1",
+      srcText: "",
     }
+    this.onChange.bind(this)
+    this.onFileUpload.bind(this)
   }
-  setBgChartData = (name) => {
+  onChange = e => {
     this.setState({
-      bigChartData: name,
+      [e.target.name]: e.target.value,
     })
+  }
+  onFileUpload = e => {
+    this.setState({
+      srcFile: e.target.files[0]
+    })
+  }
+  inputSubmit(e) {
+    e.preventDefault()
+    console.log(this.state)
   }
   render() {
     return (
       <>
         <div className="content">
           <Row lg="12">
-            <Col lg="6">
-              <Card className="card-chart">
-                <CardHeader>
-                  <h5 className="card-category">Input</h5>
-                  <CardTitle tag="h3">
-                    <i className="tim-icons icon-double-right text-success" /> 
-                    Source Text
-                  </CardTitle>
-                </CardHeader>
-                <CardBody>
-                  <Form>
-                    <FormGroup>
-                      <Input type="textarea" name="text" id="inputText" />
-                    </FormGroup>
-                    <Button className="btn btn-success">Submit</Button>
-                  </Form>
-                </CardBody>
-              </Card>
+            <Col lg="12">
+              <CardDeck lg="6">
+                <Card>
+                  <CardHeader>
+                    <h5 className="card-category">Input</h5>
+                    <CardTitle tag="h3">
+                      <i className="tim-icons icon-double-right text-success" />
+                      Source Text
+                    </CardTitle>
+                  </CardHeader>
+                  <CardBody>
+                    <Form onSubmit={this.inputSubmit.bind(this)}>
+                      <FormGroup>
+                        <Input
+                          type="textarea"
+                          name="srcText"
+                          id="inputText"
+                          size="50vh"
+                          className="border border-dark"
+                          onChange={this.onChange}
+                        />
+                        <Input
+                          type="file"
+                          name="srcFile"
+                          id="srcFile"
+                          className="mt-2"
+                          onChange={this.onFileUpload}
+                        />
+                        <Button type="submit" className="btn btn-success">
+                          Submit
+                        </Button>
+                      </FormGroup>
+                    </Form>
+                  </CardBody>
+                </Card>
+                <Card>
+                  <CardHeader>
+                    <h5 className="card-category">Output</h5>
+                    <CardTitle tag="h3">
+                      <i className="tim-icons icon-double-right text-primary" />{" "}
+                      GPT-3 Summary
+                    </CardTitle>
+                  </CardHeader>
+                  <CardBody>
+                    <div className="border border-primary rounded p-3 text-light">
+                      Lorem ipsum dolor sit amet
+                    </div>
+                  </CardBody>
+                </Card>
+              </CardDeck>
             </Col>
-            <Col lg="6">
-              <Card className="card-chart">
-                <CardHeader>
-                  <h5 className="card-category">Output</h5>
-                  <CardTitle tag="h3">
-                    <i className="tim-icons icon-double-right text-primary" />{" "}
-                    GPT-3 Summary
-                  </CardTitle>
-                </CardHeader>
-                <CardBody>
-                  <div className="border border-primary rounded p-3 text-light">
-                    Lorem ipsum dolor sit amet
-                  </div>
-                </CardBody>
-              </Card>
+          </Row>
+          <Row lg="12" className="mt-3">
+            <Col lg="12">
+              <CardDeck lg="6">
+                <Card>
+                  <CardHeader>
+                    <h5 className="card-category">Input</h5>
+                    <CardTitle tag="h3">
+                      <i className="tim-icons icon-double-right text-success" />
+                      Ask GPT-3
+                    </CardTitle>
+                  </CardHeader>
+                  <CardBody>
+                    <div className="border border-dark rounded p-3 text-light mb-2">
+                      Previous input
+                    </div>
+                    <Form>
+                      <FormGroup className="has-feedback">
+                        <Input
+                          type="text"
+                          name="text"
+                          id="inputText"
+                          placeholder="Ask GPT-3 anything!"
+                        />
+                        <FontAwesomeIcon
+                          icon={faPaperPlane}
+                          className="form-control-feedback"
+                        />
+                      </FormGroup>
+                    </Form>
+                  </CardBody>
+                </Card>
+                <Card>
+                  <CardHeader>
+                    <h5 className="card-category">Output</h5>
+                    <CardTitle tag="h3">
+                      <i className="tim-icons icon-double-right text-primary" />{" "}
+                      GPT-3 Answers
+                    </CardTitle>
+                  </CardHeader>
+                  <CardBody>
+                    <div className="border border-primary rounded p-3 text-light">
+                      Lorem ipsum dolor sit amet
+                    </div>
+                  </CardBody>
+                </Card>
+              </CardDeck>
             </Col>
           </Row>
         </div>
