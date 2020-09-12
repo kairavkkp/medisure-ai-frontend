@@ -20,7 +20,8 @@ import React from "react"
 import classNames from "classnames"
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2"
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons"
 // reactstrap components
 import {
   Button,
@@ -40,7 +41,7 @@ import {
   Col,
   UncontrolledTooltip,
   FormGroup,
-  Form
+  Form,
 } from "reactstrap"
 
 // core components
@@ -67,14 +68,14 @@ class Home extends React.Component {
     return (
       <>
         <div className="content">
-          <Row lg="12">
+          <Row lg="6">
             <Col lg="6">
               <Card className="card-chart">
                 <CardHeader>
                   <h5 className="card-category">Input</h5>
                   <CardTitle tag="h3">
-                    <i className="tim-icons icon-double-right text-success" /> 
-                    Sample Title Input
+                    <i className="tim-icons icon-double-right text-success" />
+                    Source Text
                   </CardTitle>
                 </CardHeader>
                 <CardBody>
@@ -93,13 +94,19 @@ class Home extends React.Component {
                   <h5 className="card-category">Output</h5>
                   <CardTitle tag="h3">
                     <i className="tim-icons icon-double-right text-primary" />{" "}
-                    Sample Title Output
+                    Ask GPT-3
                   </CardTitle>
                 </CardHeader>
                 <CardBody>
                   <div className="border border-primary rounded p-3 text-light">
                     Lorem ipsum dolor sit amet
                   </div>
+                  <Form className="my-4">
+                    <FormGroup className="has-feedback">
+                      <Input type="text" name="text" id="inputText" placeholder="Ask GPT-3 anything!" />
+                      <FontAwesomeIcon icon={faPaperPlane} className="form-control-feedback"/>
+                    </FormGroup>
+                  </Form>
                 </CardBody>
               </Card>
             </Col>

@@ -20,6 +20,7 @@ import React from "react"
 import classNames from "classnames"
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2"
+import { useDropzone } from "react-dropzone"
 
 // reactstrap components
 import {
@@ -51,6 +52,29 @@ import {
   chartExample4,
 } from "variables/charts.js"
 
+function Basic(props) {
+  const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
+  
+  const files = acceptedFiles.map(file => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+    </li>
+  ));
+
+  return (
+    <section className="container" lg="4">
+      <div {...getRootProps({className: 'dropzone'})}>
+        <input {...getInputProps()} />
+        <p>Drag 'n' drop some files here, or click to select files</p>
+      </div>
+      <aside>
+        <h4>Files</h4>
+        <ul>{files}</ul>
+      </aside>
+    </section>
+  );
+}
+
 class Home extends React.Component {
   constructor(props) {
     super(props)
@@ -74,7 +98,7 @@ class Home extends React.Component {
                   <h5 className="card-category">Input</h5>
                   <CardTitle tag="h3">
                     <i className="tim-icons icon-double-right text-success" /> 
-                    Sample Title Input
+                    Source Text
                   </CardTitle>
                 </CardHeader>
                 <CardBody>
@@ -93,7 +117,7 @@ class Home extends React.Component {
                   <h5 className="card-category">Output</h5>
                   <CardTitle tag="h3">
                     <i className="tim-icons icon-double-right text-primary" />{" "}
-                    Sample Title Output
+                    GPT-3 Summary
                   </CardTitle>
                 </CardHeader>
                 <CardBody>
