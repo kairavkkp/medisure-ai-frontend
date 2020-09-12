@@ -15,79 +15,59 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
-// nodejs library that concatenates classes
-import classNames from "classnames";
-
-// reactstrap components
-import {
-  Button,
-  Collapse,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  Input,
-  InputGroup,
-  NavbarBrand,
-  Navbar,
-  NavLink,
-  Nav,
-  Container,
-  Modal
-} from "reactstrap";
+import React from "react"
 
 class AppNavbar extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       collapseOpen: false,
       modalSearch: false,
-      color: "navbar-transparent"
-    };
+      color: "navbar-transparent",
+    }
   }
   componentDidMount() {
-    window.addEventListener("resize", this.updateColor);
+    window.addEventListener("resize", this.updateColor)
   }
   componentWillUnmount() {
-    window.removeEventListener("resize", this.updateColor);
+    window.removeEventListener("resize", this.updateColor)
   }
   // function that adds color white/transparent to the navbar on resize (this is for the collapse)
   updateColor = () => {
     if (window.innerWidth < 993 && this.state.collapseOpen) {
       this.setState({
-        color: "bg-white"
-      });
+        color: "bg-white",
+      })
     } else {
       this.setState({
-        color: "navbar-transparent"
-      });
+        color: "navbar-transparent",
+      })
     }
-  };
+  }
   // this function opens and closes the collapse on small devices
   toggleCollapse = () => {
     if (this.state.collapseOpen) {
       this.setState({
-        color: "navbar-transparent"
-      });
+        color: "navbar-transparent",
+      })
     } else {
       this.setState({
-        color: "bg-white"
-      });
+        color: "bg-white",
+      })
     }
     this.setState({
-      collapseOpen: !this.state.collapseOpen
-    });
-  };
+      collapseOpen: !this.state.collapseOpen,
+    })
+  }
   // this function is to open the Search modal
   toggleModalSearch = () => {
     this.setState({
-      modalSearch: !this.state.modalSearch
-    });
-  };
+      modalSearch: !this.state.modalSearch,
+    })
+  }
   render() {
-    return null;
+    return null
   }
 }
 
-export default AppNavbar;
+export default AppNavbar

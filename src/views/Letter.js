@@ -16,30 +16,19 @@
 
 */
 import React from "react"
-// nodejs library that concatenates classes
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons"
 // reactstrap components
 import {
   Button,
-  ButtonGroup,
   Card,
-  CardHeader,
   CardBody,
+  CardDeck,
+  CardHeader,
   CardTitle,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  Label,
-  Input,
-  Table,
-  Row,
   Col,
-  UncontrolledTooltip,
-  FormGroup,
   Form,
-  CardDeck
+  FormGroup,
+  Input,
+  Row,
 } from "reactstrap"
 
 class Home extends React.Component {

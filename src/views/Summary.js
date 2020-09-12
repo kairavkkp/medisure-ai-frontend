@@ -15,57 +15,78 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import axios from "axios"
+import FormData from "form-data"
 import React from "react"
-
+import ReactDOM from "react-dom"
 // reactstrap components
 import {
   Button,
-  ButtonGroup,
   Card,
-  CardHeader,
   CardBody,
-  CardTitle,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  Label,
-  Input,
-  Table,
-  Row,
-  Col,
-  UncontrolledTooltip,
-  FormGroup,
-  Form,
-  FormText,
   CardDeck,
+  CardHeader,
+  CardTitle,
+  Col,
+  Form,
+  FormGroup,
+  Input,
+  Row,
 } from "reactstrap"
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons"
+const URL = "https://pennapps-2020-289305.ue.r.appspot.com/gpt3"
 
 class Home extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       srcText: "",
+      qText: "",
+      oldInput: []
     }
+    this.askForm = null;
     this.onChange.bind(this)
     this.onFileUpload.bind(this)
   }
-  onChange = e => {
+  onChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     })
   }
-  onFileUpload = e => {
+  onFileUpload = (e) => {
     this.setState({
-      srcFile: e.target.files[0]
+      srcFile: e.target.files[0],
     })
   }
   inputSubmit(e) {
     e.preventDefault()
     console.log(this.state)
+    const formData = new FormData()
+    // Send file
+    if (this.state.srcFile) {
+      formData.append("file", this.state.srcFile)
+    } else {
+      formData.append("text", this.state.srcText)
+    }
+    axios.post(URL, formData)
+  }
+  askSubmit(e) {
+    e.preventDefault()
+    console.log(this.state)
+    if (this.state.qText) {
+      this.setState({
+        oldInput: this.state.oldInput.concat(this.state.qText)
+      })
+      if (this.askForm) {
+        ReactDOM.findDOMNode(this.askForm).reset();
+      }
+      // Send query
+      const formData = new FormData()
+      formData.append("query", this.state.qText);
+      axios.post(URL, formData);
+    }
   }
   render() {
     return (
@@ -137,19 +158,28 @@ class Home extends React.Component {
                   </CardHeader>
                   <CardBody>
                     <div className="border border-dark rounded p-3 text-light mb-2">
-                      Previous input
+                      {
+                        this.state.oldInput.map(old => (
+                          <p>
+                            &gt;&nbsp;{old}
+                          </p>
+                        ))
+                      }
                     </div>
-                    <Form>
+                    <Form onSubmit={this.askSubmit.bind(this)} ref={form => this.askForm = form}>
                       <FormGroup className="has-feedback">
                         <Input
                           type="text"
-                          name="text"
+                          name="qText"
                           id="inputText"
                           placeholder="Ask GPT-3 anything!"
+                          onChange={this.onChange}
+                          innerRef={this.state.qText}
                         />
                         <FontAwesomeIcon
                           icon={faPaperPlane}
                           className="form-control-feedback"
+                          onClick={this.askSubmit.bind(this)}
                         />
                       </FormGroup>
                     </Form>
