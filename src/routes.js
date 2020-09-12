@@ -16,6 +16,9 @@
 
 */
 import Home from "views/Home.js";
+import Summary from "views/Summary.js";
+import Conversation from "views/Conversation.js";
+import Quiz from "views/Quiz.js";
 
 var routes = [
   {
@@ -26,7 +29,25 @@ var routes = [
     layout: "/app"
   },
   {
-
+    path: "/summary",
+    name: "Summary",
+    icon: "tim-icons icon-paper",
+    component: Summary,
+    layout: "/app"
+  },
+  {
+    path: "/conversation",
+    name: "Conversation",
+    icon: "tim-icons icon-satisfied",
+    component: Conversation,
+    layout: "/app"
+  },
+  {
+    path: "/quiz",
+    name: "Quiz",
+    icon: "tim-icons icon-pencil",
+    component: Quiz,
+    layout: "/app"
   }
 ];
 export default routes;

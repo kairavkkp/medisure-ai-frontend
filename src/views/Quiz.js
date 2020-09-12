@@ -68,8 +68,40 @@ class Home extends React.Component {
       <>
         <div className="content">
           <Row lg="12">
-            <Col lg="12">
-              <h1>Sample Landing Page</h1>
+            <Col lg="6">
+              <Card className="card-chart">
+                <CardHeader>
+                  <h5 className="card-category">Input</h5>
+                  <CardTitle tag="h3">
+                    <i className="tim-icons icon-double-right text-success" /> 
+                    Sample Title Input
+                  </CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <Form>
+                    <FormGroup>
+                      <Input type="textarea" name="text" id="inputText" />
+                    </FormGroup>
+                    <Button className="btn btn-success">Submit</Button>
+                  </Form>
+                </CardBody>
+              </Card>
+            </Col>
+            <Col lg="6">
+              <Card className="card-chart">
+                <CardHeader>
+                  <h5 className="card-category">Output</h5>
+                  <CardTitle tag="h3">
+                    <i className="tim-icons icon-double-right text-primary" />{" "}
+                    Sample Title Output
+                  </CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <div className="border border-primary rounded p-3 text-light">
+                    Lorem ipsum dolor sit amet
+                  </div>
+                </CardBody>
+              </Card>
             </Col>
           </Row>
         </div>
