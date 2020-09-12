@@ -55,7 +55,7 @@ class Home extends React.Component {
                     <h5 className="card-category">Input</h5>
                     <CardTitle tag="h3">
                       <i className="tim-icons icon-double-right text-success" />
-                      Source Text
+                      Information
                     </CardTitle>
                   </CardHeader>
                   <CardBody>
