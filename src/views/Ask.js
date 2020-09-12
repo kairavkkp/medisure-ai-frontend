@@ -36,43 +36,19 @@ import {
   Row,
 } from "reactstrap"
 
-const URL = "https://pennapps-2020-289305.ue.r.appspot.com/gpt3"
-
-class Home extends React.Component {
+class Ask extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      srcText: "",
-      qText: "",
-      responseHash: "",
-      oldInput: []
+      oldInput: [],
+      qText: ""
     }
-    this.askForm = null;
     this.onChange.bind(this)
-    this.onFileUpload.bind(this)
-
   }
   onChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     })
-  }
-  onFileUpload = (e) => {
-    this.setState({
-      srcFile: e.target.files[0],
-    })
-  }
-  inputSubmit(e) {
-    e.preventDefault()
-    console.log(this.state)
-    const formData = new FormData()
-    // Send file
-    if (this.state.srcFile) {
-      formData.append("file", this.state.srcFile)
-    } else {
-      formData.append("text", this.state.srcText)
-    }
-    axios.post(URL, formData)
   }
   askSubmit(e) {
     e.preventDefault()
@@ -95,60 +71,7 @@ class Home extends React.Component {
     return (
       <>
         <div className="content">
-          <Row lg="12">
-            <Col lg="12">
-              <CardDeck lg="6">
-                <Card>
-                  <CardHeader>
-                    <h5 className="card-category">Input</h5>
-                    <CardTitle tag="h3">
-                      <i className="tim-icons icon-double-right text-success" />
-                      Source Text
-                    </CardTitle>
-                  </CardHeader>
-                  <CardBody>
-                    <Form onSubmit={this.inputSubmit.bind(this)}>
-                      <FormGroup>
-                        <Input
-                          type="textarea"
-                          name="srcText"
-                          id="inputText"
-                          size="50vh"
-                          className="border border-dark"
-                          onChange={this.onChange}
-                        />
-                        <Input
-                          type="file"
-                          name="srcFile"
-                          id="srcFile"
-                          className="mt-2"
-                          onChange={this.onFileUpload}
-                        />
-                        <Button type="submit" className="btn btn-success">
-                          Submit
-                        </Button>
-                      </FormGroup>
-                    </Form>
-                  </CardBody>
-                </Card>
-                <Card>
-                  <CardHeader>
-                    <h5 className="card-category">Output</h5>
-                    <CardTitle tag="h3">
-                      <i className="tim-icons icon-double-right text-primary" />{" "}
-                      Summary
-                    </CardTitle>
-                  </CardHeader>
-                  <CardBody>
-                    <div className="border border-primary rounded p-3 text-light">
-                      Lorem ipsum dolor sit amet
-                    </div>
-                  </CardBody>
-                </Card>
-              </CardDeck>
-            </Col>
-          </Row>
-          <Row lg="12" className="mt-3">
+        <Row lg="12" className="mt-3">
             <Col lg="12">
               <CardDeck lg="6">
                 <Card>
@@ -211,4 +134,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home
+export default Ask

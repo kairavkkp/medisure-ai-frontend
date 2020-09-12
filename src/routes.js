@@ -17,6 +17,7 @@
 */
 import Home from "views/Home.js";
 import Summary from "views/Summary.js";
+import Ask from "views/Ask.js";
 import Letter from "views/Letter.js";
 
 var routes = [
@@ -32,6 +33,13 @@ var routes = [
     name: "Summary",
     icon: "tim-icons icon-paper",
     component: Summary,
+    layout: "",
+  },
+  {
+    path: "/ask",
+    name: "Ask",
+    icon: "tim-icons icon-single-02",
+    component: Ask,
     layout: "",
   },
   {

@@ -16,40 +16,8 @@
 
 */
 import React from "react"
-// nodejs library that concatenates classes
-import classNames from "classnames"
-// react plugin used to create charts
-import { Line, Bar } from "react-chartjs-2"
-
 // reactstrap components
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  CardHeader,
-  CardBody,
-  CardTitle,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  Label,
-  Input,
-  Table,
-  Row,
-  Col,
-  UncontrolledTooltip,
-  FormGroup,
-  Form
-} from "reactstrap"
-
-// core components
-import {
-  chartExample1,
-  chartExample2,
-  chartExample3,
-  chartExample4,
-} from "variables/charts.js"
+import { Col, Row } from "reactstrap"
 
 class Home extends React.Component {
   constructor(props) {
