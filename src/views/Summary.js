@@ -36,8 +36,7 @@ import {
   Row,
 } from "reactstrap";
 
-const URL = "https://pennapps-2020-289305.ue.r.appspot.com/vision";
-// const URL = "http://localhost:8080/vision";
+const URL = "https://backend-nlstr4buia-uc.a.run.app/vision";
 
 class Home extends React.Component {
   constructor(props) {
@@ -56,7 +55,8 @@ class Home extends React.Component {
       srcFile: e.target.files[0],
     });
   };
-  inputSubmit(e) {
+
+  async inputSubmit(e) {
     e.preventDefault();
     console.log(this.state);
     const formData = new FormData();
@@ -66,8 +66,11 @@ class Home extends React.Component {
     } else {
       formData.append("text", this.state.srcText);
     }
-    axios.post(URL, formData);
+    const response = await axios.post(URL, formData);
+    const hash = response.data;
+    console.log(hash);
   }
+
   askSubmit(e) {
     e.preventDefault();
     console.log(this.state);
@@ -85,6 +88,7 @@ class Home extends React.Component {
       axios.post(URL, formData);
     }
   }
+
   render() {
     return (
       <>
