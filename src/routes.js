@@ -25,21 +25,21 @@ var routes = [
     name: "Home",
     icon: "tim-icons icon-bank",
     component: Home,
-    layout: "/app"
+    layout: "",
   },
   {
     path: "/summary",
     name: "Summary",
     icon: "tim-icons icon-paper",
     component: Summary,
-    layout: "/app"
+    layout: "",
   },
   {
     path: "/letter",
     name: "Letter",
     icon: "tim-icons icon-bullet-list-67",
     component: Letter,
-    layout: "/app"
-  }
+    layout: "",
+  },
 ];
 export default routes;

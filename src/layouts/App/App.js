@@ -38,7 +38,7 @@ class App extends React.Component {
     this.state = {
       backgroundColor: "blue",
       sidebarOpened:
-        document.documentElement.className.indexOf("nav-open") !== -1
+        document.documentElement.className.indexOf("nav-open") !== -1,
     };
   }
   componentDidMount() {
@@ -77,11 +77,11 @@ class App extends React.Component {
     document.documentElement.classList.toggle("nav-open");
     this.setState({ sidebarOpened: !this.state.sidebarOpened });
   };
-  getRoutes = routes => {
+  getRoutes = (routes) => {
     console.log("Routes", routes);
     return routes.map((prop, key) => {
       console.log(prop.layout);
-      if (prop.layout === "/app") {
+      if (prop.layout === "") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -94,10 +94,10 @@ class App extends React.Component {
       }
     });
   };
-  handleBgClick = color => {
+  handleBgClick = (color) => {
     this.setState({ backgroundColor: color });
   };
-  getBrandText = path => {
+  getBrandText = (path) => {
     for (let i = 0; i < routes.length; i++) {
       if (
         this.props.location.pathname.indexOf(
@@ -112,7 +112,7 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <div className="wrapper">
+        <div className='wrapper'>
           <Sidebar
             {...this.props}
             routes={routes}
@@ -120,13 +120,13 @@ class App extends React.Component {
             logo={{
               outterLink: "https://www.creative-tim.com/",
               text: "PennApps Project",
-              imgSrc: logo
+              imgSrc: logo,
             }}
             toggleSidebar={this.toggleSidebar}
           />
           <div
-            className="main-panel"
-            ref="mainPanel"
+            className='main-panel'
+            ref='mainPanel'
             data={this.state.backgroundColor}
           >
             <AppNavbar
@@ -137,12 +137,14 @@ class App extends React.Component {
             />
             <Switch>
               {this.getRoutes(routes)}
-              <Redirect from="*" to="/app/home"/>
+              <Redirect from='*' to='/home' />
             </Switch>
-            {// we don't want the Footer to be rendered on map page
-            this.props.location.pathname.indexOf("maps") !== -1 ? null : (
-              <Footer fluid />
-            )}
+            {
+              // we don't want the Footer to be rendered on map page
+              this.props.location.pathname.indexOf("maps") !== -1 ? null : (
+                <Footer fluid />
+              )
+            }
           </div>
         </div>
         <FixedPlugin
