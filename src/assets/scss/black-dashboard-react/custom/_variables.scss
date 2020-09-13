@@ -332,7 +332,7 @@ $border-thick:               2px !default;
 $border-width:                .0625rem !default;
 $border-color:                $gray-200 !default;
 
-$border-radius:               .25rem !default;
+$border-radius:               .50rem !default;
 $border-radius-xl:            0.875rem !default;
 $border-radius-lg:            0.4285rem !default;
 $border-radius-sm:            0.2857rem !default;
@@ -352,7 +352,7 @@ $sidebar-box-shadow:       0px 2px 22px 0 rgba(0, 0, 0,.20), 0px 2px 30px 0 rgba
 
 $component-active-color:        $white !default;
 $component-active-bg:           theme-color("primary") !default;
-$component-active-border-color: theme-color("primary") !default;
+$component-active-border-color: theme-color("success") !default;
 
 $component-hover-color:        $gray-300 !default;
 $component-hover-bg:           $gray-300 !default;
@@ -591,7 +591,7 @@ $input-border-width:                    $input-btn-border-width !default;
 $input-box-shadow:                      none !default; // 0 1px 3px 0 $gray-400 !default;
 
 $input-focus-bg:                        $white !default;
-$input-focus-border-color:              rgba(50,151,211,.25);
+$input-focus-border-color:              $success;
 $input-focus-color:                     $input-color !default;
 $input-focus-width:                     0 !default;
 $input-focus-box-shadow:                none !default; //0 1px 3px 0 $gray-500 !default;

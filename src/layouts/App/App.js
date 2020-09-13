@@ -78,9 +78,7 @@ class App extends React.Component {
     this.setState({ sidebarOpened: !this.state.sidebarOpened });
   };
   getRoutes = (routes) => {
-    console.log("Routes", routes);
     return routes.map((prop, key) => {
-      console.log(prop.layout);
       if (prop.layout === "") {
         return (
           <Route
@@ -119,7 +117,7 @@ class App extends React.Component {
             bgColor={this.state.backgroundColor}
             logo={{
               outterLink: "https://www.creative-tim.com/",
-              text: "PennApps Project",
+              text: "MedInsure.ai",
               imgSrc: logo,
             }}
             toggleSidebar={this.toggleSidebar}

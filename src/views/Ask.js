@@ -36,12 +36,14 @@ import {
   Row,
 } from "reactstrap"
 
+const URL = "https://backend-nlstr4buia-uc.a.run.app/summary"
+
 class Ask extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       messages: [],
-      qText: ""
+      qText: "",
     }
     this.onChange.bind(this)
   }
@@ -50,6 +52,18 @@ class Ask extends React.Component {
       [e.target.name]: e.target.value,
     })
   }
+  async sendQuery(qText, hash) {
+    // Send query
+    const response = await axios.post(URL, qText)
+    const message = {
+      user: false,
+      message: response.data.substring("output: ".length),
+    }
+    this.setState({
+      messages: [...this.state.messages, message],
+    })
+  }
+
   askSubmit(e) {
     e.preventDefault()
     if (this.state.qText) {
@@ -57,34 +71,27 @@ class Ask extends React.Component {
         user: true,
         message: this.state.qText,
       }
-      const altMessage = {
-        ...message,
-        user: false
-      }
       this.setState({
-        messages: [...this.state.messages, message, altMessage],
+        messages: [...this.state.messages, message],
       })
       if (this.askForm) {
         ReactDOM.findDOMNode(this.askForm).reset()
       }
-      // Send query
-      const formData = new FormData()
-      formData.append("query", this.state.qText)
-      axios.post(URL, formData)
+      this.sendQuery(this.state.qText, this.state.responseHash)
       this.setState({
-        qText: ""
+        qText: "",
       })
     }
   }
+
   render() {
     return (
       <>
         <div className="content">
-        <Row lg="6" className="mt-3 justify-content-lg-center">
+          <Row lg="6" className="mt-3 justify-content-lg-center">
             <Col lg="8">
               <Card>
                 <CardHeader>
-                  <h5 className="card-category">Input</h5>
                   <CardTitle tag="h3">
                     <i className="tim-icons icon-double-right text-success" />
                     Ask
@@ -131,7 +138,7 @@ class Ask extends React.Component {
                         type="text"
                         name="qText"
                         id="inputText"
-                        placeholder="Ask GPT-3 anything!"
+                        placeholder="Ask me anything!"
                         onChange={this.onChange}
                         innerRef={this.state.qText}
                       />
