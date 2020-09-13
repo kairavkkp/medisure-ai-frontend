@@ -3,7 +3,6 @@
   color: $danger-states;
 }
 
-
 .form-group.has-success .error,
 .input-group.has-success .error {
   color: $success;
@@ -114,9 +113,9 @@
     .input-group-prepend .input-group-text,
     .input-group-append .input-group-text{
         background-color: $white;
-        border-color: $primary;
+        border-color: $success;
         background-color: $transparent-bg;
-        border-color: $primary;
+        border-color: $success;
     }
 
     &.no-border{

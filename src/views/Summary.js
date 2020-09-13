@@ -15,12 +15,12 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
-import FormData from "form-data";
-import React from "react";
-import ReactDOM from "react-dom";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import axios from "axios"
+import FormData from "form-data"
+import React from "react"
+import ReactDOM from "react-dom"
 // reactstrap components
 import {
   Button,
@@ -34,18 +34,22 @@ import {
   FormGroup,
   Input,
   Row,
-} from "reactstrap";
+  Spinner,
+} from "reactstrap"
 
-const URL = "https://backend-nlstr4buia-uc.a.run.app/vision";
+const URL = "https://backend-nlstr4buia-uc.a.run.app/vision"
+const prefixLen = "output: ".length
 
 class Home extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      srcText: "",
       qText: "",
       responseHash: "",
+      summary: "",
       messages: [],
+      uploadLoading: false,
+      summaryLoading: false,
     }
     this.askForm = null
     this.onChange.bind(this)
@@ -59,23 +63,67 @@ class Home extends React.Component {
   onFileUpload = (e) => {
     this.setState({
       srcFile: e.target.files[0],
-    });
-  };
+    })
+  }
 
   async inputSubmit(e) {
-    e.preventDefault();
-    console.log(this.state);
-    const formData = new FormData();
+    this.setState({
+      uploadLoading: true,
+    })
+    e.preventDefault()
     // Send file
     if (this.state.srcFile) {
-      formData.append("file", this.state.srcFile);
+      const formData = new FormData()
+      formData.append("file", this.state.srcFile)
+      const response = await axios.post(URL, formData)
+      const hash = response.data
+      this.setState({
+        responseHash: hash,
+        uploadLoading: false,
+      })
+      console.log("Hash", hash)
+      this.getSummary(hash)
     } else {
-      formData.append("text", this.state.srcText);
+      this.setState({
+        uploadLoading: false,
+      })
     }
-    const response = await axios.post(URL, formData);
-    const hash = response.data;
+  }
+
+  async sendQuery(qText, hash) {
+    // Send query
+    const response = await axios.post(
+      URL + "/qa",
+      { data: qText },
+      {
+        params: {
+          doc: hash,
+        },
+      }
+    )
+    const message = {
+      user: false,
+      message: response.data.substring(prefixLen),
+    }
     this.setState({
-      responseHash: hash
+      messages: [...this.state.messages, message],
+    })
+  }
+
+  async getSummary(hash) {
+    this.setState({
+      summaryLoading: true,
+    })
+    const response = await axios.post(URL + "/summary", null, {
+      params: {
+        doc: hash,
+      },
+    })
+    const summary = response.data.substring(prefixLen);
+    console.log("Summary", summary)
+    this.setState({
+      summary: summary,
+      summaryLoading: false,
     })
   }
 
@@ -86,23 +134,15 @@ class Home extends React.Component {
         user: true,
         message: this.state.qText,
       }
-      const altMessage = {
-        ...message,
-        user: false
-      }
       this.setState({
-        messages: [...this.state.messages, message, altMessage],
+        messages: [...this.state.messages, message],
       })
       if (this.askForm) {
         ReactDOM.findDOMNode(this.askForm).reset()
       }
-      // Send query
-      const formData = new FormData()
-      formData.append("query", this.state.qText)
-      formData.append("hash", this.state.responseHash)
-      axios.post(URL, formData)
+      this.sendQuery(this.state.qText, this.state.responseHash)
       this.setState({
-        qText: ""
+        qText: "",
       })
     }
   }
@@ -116,9 +156,8 @@ class Home extends React.Component {
               <CardDeck lg="6">
                 <Card>
                   <CardHeader>
-                    <h5 className='card-category'>Input</h5>
-                    <CardTitle tag='h3'>
-                      <i className='tim-icons icon-double-right text-success' />
+                    <CardTitle tag="h3">
+                      <i className="tim-icons icon-double-right text-success" />
                       Source Text
                     </CardTitle>
                   </CardHeader>
@@ -126,30 +165,43 @@ class Home extends React.Component {
                     <Form onSubmit={this.inputSubmit.bind(this)}>
                       <FormGroup>
                         <Input
-                          type='file'
-                          name='srcFile'
-                          id='srcFile'
-                          className='mt-2'
+                          type="file"
+                          name="srcFile"
+                          id="srcFile"
+                          className="mt-2"
                           onChange={this.onFileUpload}
                         />
-                        <Button type='submit' className='btn btn-success'>
-                          Submit
-                        </Button>
+                        <Row>
+                          <Col lg={4}>
+                            <Button type="submit" className="btn btn-success">
+                              Submit
+                            </Button>
+                          </Col>
+                          <Col lg={4}>
+                            {this.state.uploadLoading ? (
+                              <Spinner color="light" className="mt-2" />
+                            ) : null}
+                          </Col>
+                        </Row>
                       </FormGroup>
                     </Form>
                   </CardBody>
                 </Card>
                 <Card>
                   <CardHeader>
-                    <h5 className='card-category'>Output</h5>
-                    <CardTitle tag='h3'>
-                      <i className='tim-icons icon-double-right text-primary' />{" "}
-                      Summary
-                    </CardTitle>
+                    <Row>
+                      <CardTitle tag="h3" className="ml-3">
+                        <i className="tim-icons icon-double-right text-primary" />
+                        Summary
+                      </CardTitle>
+                      {this.state.summaryLoading ? (
+                        <Spinner color="light" className="mt-2 ml-5" />
+                      ) : null}
+                    </Row>
                   </CardHeader>
                   <CardBody>
-                    <div className='border border-primary rounded p-3 text-light'>
-                      Lorem ipsum dolor sit amet
+                    <div className="border border-primary rounded p-3 text-dark">
+                      {this.state.summary ? this.state.summary : ""}
                     </div>
                   </CardBody>
                 </Card>
@@ -160,7 +212,6 @@ class Home extends React.Component {
             <Col lg="8">
               <Card>
                 <CardHeader>
-                  <h5 className="card-category">Input</h5>
                   <CardTitle tag="h3">
                     <i className="tim-icons icon-double-right text-success" />
                     Ask
@@ -207,9 +258,10 @@ class Home extends React.Component {
                         type="text"
                         name="qText"
                         id="inputText"
-                        placeholder="Ask GPT-3 anything!"
+                        placeholder="Ask me anything!"
                         onChange={this.onChange}
                         innerRef={this.state.qText}
+                        className="border border-dark inputFocus"
                       />
                       <FontAwesomeIcon
                         icon={faPaperPlane}
@@ -225,8 +277,8 @@ class Home extends React.Component {
           </Row>
         </div>
       </>
-    );
+    )
   }
 }
 
-export default Home;
+export default Home

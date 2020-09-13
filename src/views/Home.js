@@ -17,7 +17,7 @@
 */
 import React from "react"
 // reactstrap components
-import { Col, Row } from "reactstrap"
+import { Card, CardHeader, CardTitle, Col, Row } from "reactstrap"
 
 class Home extends React.Component {
   constructor(props) {
@@ -37,7 +37,11 @@ class Home extends React.Component {
         <div className="content">
           <Row lg="12">
             <Col lg="12">
-              <h1>Sample Landing Page</h1>
+              <Card>
+                <CardHeader>
+                  <CardTitle tag="h3">MedInsure.ai</CardTitle>
+                </CardHeader>
+              </Card>
             </Col>
           </Row>
         </div>
