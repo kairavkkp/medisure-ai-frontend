@@ -35,13 +35,15 @@ import {
 import axios from "axios"
 import FormData from "form-data"
 
-const URL = "https://backend-nlstr4buia-uc.a.run.app/vision"
+// const URL = "http://localhost:5000/denial";
+const URL = "https://backend-nlstr4buia-uc.a.run.app/denial"
 
 class Letter extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      loading: false,
+      fileLoading: false,
+      formLoading: false,
     }
     this.onFileUpload.bind(this)
   }
@@ -51,7 +53,7 @@ class Letter extends React.Component {
   }
   async inputSubmit(file) {
     this.setState({
-      loading: true,
+      fileLoading: true,
     })
     // Send file
     if (file) {
@@ -60,21 +62,64 @@ class Letter extends React.Component {
       const response = await axios.post(URL, formData)
       const data = response.data
       console.log(data)
+      function parseDate(dateString) {
+        const date = new Date(dateString);
+        const yyyy = date.getFullYear();
+        let mm = date.getMonth()
+        if (mm < 10) {
+          mm = "0" + mm;
+        }
+        let dd = date.getDate();
+        if (dd < 10) {
+          dd = "0" + dd;
+        }
+        if (isNaN(yyyy) || isNaN(mm) || isNaN(dd)) {
+          return undefined;
+        }
+        return `${yyyy}-${mm}-${dd}`;
+      }
       this.setState({
-        loading: false,
+        fileLoading: false,
+        name: data["Patient Name"],
+        age: data["Age"],
+        dateDiagnosis: parseDate(data["Diagnosis Date"]),
+        treatment: data["Treatment/procedure name"],
+        treatmentStart: parseDate(data["Treatment Date"]),
+        condition: data["Condition"],
+        insurancePlan: data["Insurance Plan"],
+        treatmentHospital: data["Hospital"],
+        treatmentDoctor: data["Supervising Doctor"],
+        inNetwork: data["In-network provider"],
+        state: data["Patient Plan State"],
+        lifeThreatening: data["Life-threatening urgency"],
+        reasonDenial: data["Reason"],
       })
-      // this.setState({
-      //   responseHash: hash,
-      //   loading: false,
-      // })
-      // console.log(hash)
-      // this.getSummary(hash)
+      console.log(this.state)
     } else {
       this.setState({
-        loading: false,
+        fileLoading: false,
       })
     }
     console.log("Done")
+  }
+  async formSubmit(e) {
+    e.preventDefault()
+    this.setState({
+      formLoading: true,
+    })
+    console.log(this.state);
+    const formData = new FormData();
+    for (let key of Object.keys(this.state)) {
+      // Skip loading states
+      if (["fileLoading", "formLoading"].includes(key)) {
+        continue;
+      }
+      formData.append(key, this.state[key]);
+    }
+    axios.post(URL + "/generate", formData)
+    this.setState({
+      formLoading: false,
+    })
   }
   render() {
     const labelSize = 4
@@ -108,13 +153,13 @@ class Letter extends React.Component {
                           />
                         </Col>
                         <Col lg={1}>
-                          {this.state.loading ? (
+                          {this.state.fileLoading ? (
                             <Spinner color="light" className="mt-2" />
                           ) : null}
                         </Col>
                       </FormGroup>
                     </Form>
-                    <Form>
+                    <Form onSubmit={this.formSubmit.bind(this)}>
                       <FormGroup row>
                         <Label for="input-name" tag="h4" lg={labelSize}>
                           Patient Name
@@ -211,24 +256,6 @@ class Letter extends React.Component {
                             onChange={(e) =>
                               this.setState({
                                 treatmentStart: e.target.value,
-                              })
-                            }
-                          />
-                        </Col>
-                      </FormGroup>
-                      <FormGroup row>
-                        <Label for="input-surgery-date" tag="h4" lg={labelSize}>
-                          Surgery Date
-                        </Label>
-                        <Col lg={inputSize}>
-                          <Input
-                            type="date"
-                            name="surgeryDate"
-                            id="input-surgery-date"
-                            value={this.state.surgeryDate}
-                            onChange={(e) =>
-                              this.setState({
-                                surgeryDate: e.target.value,
                               })
                             }
                           />
@@ -406,16 +433,23 @@ class Letter extends React.Component {
                           />
                         </Col>
                       </FormGroup>
-                      <Button className="btn btn-success">Generate</Button>
+                      <Button type="submit" className="btn btn-success">
+                        Generate
+                      </Button>
                     </Form>
                   </CardBody>
                 </Card>
                 <Card>
                   <CardHeader>
-                    <CardTitle tag="h3">
-                      <i className="tim-icons icon-double-right text-primary" />{" "}
-                      Denial Appeal Letter
-                    </CardTitle>
+                    <Row>
+                      <CardTitle tag="h3" className="ml-3">
+                        <i className="tim-icons icon-double-right text-primary" />
+                        Denial Appeal Letter
+                      </CardTitle>
+                      {this.state.formLoading ? (
+                        <Spinner color="light" className="mt-2 ml-lg-5" />
+                      ) : null}
+                    </Row>
                   </CardHeader>
                   <CardBody>
                     <div className="border border-primary rounded p-3 text-light">
