@@ -45,10 +45,16 @@ class Home extends React.Component {
       srcText: "",
       qText: "",
       responseHash: "",
-      oldInput: [],
-    };
-    this.askForm = null;
-    this.onFileUpload.bind(this);
+      messages: [],
+    }
+    this.askForm = null
+    this.onChange.bind(this)
+    this.onFileUpload.bind(this)
+  }
+  onChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
   }
   onFileUpload = (e) => {
     this.setState({
@@ -68,34 +74,46 @@ class Home extends React.Component {
     }
     const response = await axios.post(URL, formData);
     const hash = response.data;
-    console.log(hash);
+    this.setState({
+      responseHash: hash
+    })
   }
 
   askSubmit(e) {
-    e.preventDefault();
-    console.log(this.state);
+    e.preventDefault()
     if (this.state.qText) {
+      const message = {
+        user: true,
+        message: this.state.qText,
+      }
+      const altMessage = {
+        ...message,
+        user: false
+      }
       this.setState({
-        oldInput: this.state.oldInput.concat(this.state.qText),
-      });
+        messages: [...this.state.messages, message, altMessage],
+      })
       if (this.askForm) {
-        ReactDOM.findDOMNode(this.askForm).reset();
+        ReactDOM.findDOMNode(this.askForm).reset()
       }
       // Send query
-      const formData = new FormData();
-      formData.append("query", this.state.qText);
-      formData.append("hash", this.state.responseHash);
-      axios.post(URL, formData);
+      const formData = new FormData()
+      formData.append("query", this.state.qText)
+      formData.append("hash", this.state.responseHash)
+      axios.post(URL, formData)
+      this.setState({
+        qText: ""
+      })
     }
   }
 
   render() {
     return (
       <>
-        <div className='content'>
-          <Row lg='12'>
-            <Col lg='12'>
-              <CardDeck lg='6'>
+        <div className="content">
+          <Row lg="6">
+            <Col lg="12">
+              <CardDeck lg="6">
                 <Card>
                   <CardHeader>
                     <h5 className='card-category'>Input</h5>
@@ -138,60 +156,71 @@ class Home extends React.Component {
               </CardDeck>
             </Col>
           </Row>
-          <Row lg='12' className='mt-3'>
-            <Col lg='12'>
-              <CardDeck lg='6'>
-                <Card>
-                  <CardHeader>
-                    <h5 className='card-category'>Input</h5>
-                    <CardTitle tag='h3'>
-                      <i className='tim-icons icon-double-right text-success' />
-                      Ask
-                    </CardTitle>
-                  </CardHeader>
-                  <CardBody>
-                    <div className='border border-dark rounded p-3 text-light mb-2'>
-                      {this.state.oldInput.map((old) => (
-                        <p>&gt;&nbsp;{old}</p>
-                      ))}
-                    </div>
-                    <Form
-                      onSubmit={this.askSubmit.bind(this)}
-                      ref={(form) => (this.askForm = form)}
-                    >
-                      <FormGroup className='has-feedback'>
-                        <Input
-                          type='text'
-                          name='qText'
-                          id='inputText'
-                          placeholder='Ask GPT-3 anything!'
-                          onChange={this.onChange}
-                          innerRef={this.state.qText}
-                        />
-                        <FontAwesomeIcon
-                          icon={faPaperPlane}
-                          className='form-control-feedback text-success'
-                          onClick={this.askSubmit.bind(this)}
-                        />
-                      </FormGroup>
-                    </Form>
-                  </CardBody>
-                </Card>
-                <Card>
-                  <CardHeader>
-                    <h5 className='card-category'>Output</h5>
-                    <CardTitle tag='h3'>
-                      <i className='tim-icons icon-double-right text-primary' />{" "}
-                      Answers
-                    </CardTitle>
-                  </CardHeader>
-                  <CardBody>
-                    <div className='border border-primary rounded p-3 text-light'>
-                      Lorem ipsum dolor sit amet
-                    </div>
-                  </CardBody>
-                </Card>
-              </CardDeck>
+          <Row lg="6" className="mt-3 justify-content-lg-center">
+            <Col lg="8">
+              <Card>
+                <CardHeader>
+                  <h5 className="card-category">Input</h5>
+                  <CardTitle tag="h3">
+                    <i className="tim-icons icon-double-right text-success" />
+                    Ask
+                  </CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <div className="border border-dark rounded p-3 text-light mb-2">
+                    {this.state.messages.map((message, idx) => {
+                      if (message.user) {
+                        return (
+                          <Row lg={12} className="justify-content-lg-end">
+                            <Col lg={6}>
+                              <div
+                                className="border border-success rounded ml-2 p-2 pl-4 mb-1 text-dark"
+                                style={{ borderRadius: "30%" }}
+                              >
+                                {message.message}
+                              </div>
+                            </Col>
+                          </Row>
+                        )
+                      } else {
+                        return (
+                          <Row lg={12} className="justify-content-lg-start">
+                            <Col lg={6}>
+                              <div
+                                className="border border-primary rounded ml-2 p-2 pl-4 mb-1 text-dark"
+                                style={{ borderRadius: "30%" }}
+                              >
+                                {message.message}
+                              </div>
+                            </Col>
+                          </Row>
+                        )
+                      }
+                    })}
+                  </div>
+                  <Form
+                    onSubmit={this.askSubmit.bind(this)}
+                    ref={(form) => (this.askForm = form)}
+                  >
+                    <FormGroup className="has-feedback">
+                      <Input
+                        type="text"
+                        name="qText"
+                        id="inputText"
+                        placeholder="Ask GPT-3 anything!"
+                        onChange={this.onChange}
+                        innerRef={this.state.qText}
+                      />
+                      <FontAwesomeIcon
+                        icon={faPaperPlane}
+                        className="form-control-feedback text-success"
+                        onClick={this.askSubmit.bind(this)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </FormGroup>
+                  </Form>
+                </CardBody>
+              </Card>
             </Col>
           </Row>
         </div>
