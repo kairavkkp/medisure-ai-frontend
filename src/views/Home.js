@@ -53,8 +53,9 @@ class Home extends React.Component {
                 </CardHeader>
                 <hr />
                 <CardBody className="text-center">
-                  Medisure provides a suite of NLP-powered tools to help
-                  demystify medical insurance and help word legal claim appeals.
+                  A consolidated suite of deep-learning powered NLP tools to
+                  help demystify medical insurance and generate insurance claim
+                  denial appeals
                 </CardBody>
               </Card>
             </Col>
@@ -72,14 +73,16 @@ class Home extends React.Component {
                   <CardBody className="">
                     <ul>
                       <li style={{ color: "#525f7f" }}>
-                        Upload a plan document (e.g. Aetna Bronze, Cigma MD PPO)
+                        Upload a Statement of Benefits and Coverage Document
+                        (e.g. Aetna Bronze, Cigma MD PPO)
                       </li>
                       <li style={{ color: "#525f7f" }}>
-                        Google Cloud Vision API extracts tables
+                        Google Cloud Document API extracts text and tables from
+                        document
                       </li>
                       <li style={{ color: "#525f7f" }}>
-                        Google DialogFlow enables users to query in natural
-                        language, GPT-3 extracts response
+                        GPT-3 enables users in natural language and get
+                        responses customized for their insurance policy
                       </li>
                     </ul>
                   </CardBody>
@@ -92,9 +95,14 @@ class Home extends React.Component {
                   </CardHeader>
                   <hr />
                   <CardBody className="">
-                    Enter your treatment details and reason of claim denial.
-                    Based on your condition, we generate a customized insurance
-                    claim denial appeal letter with correct legal language
+                    Medisure.ai asks the user to upload the denial notice they
+                    received from their insurance provider. Leveraging the
+                    Google Cloud Document API, from the converted text, we use a
+                    combination of tf-idf summarization and gpt-3 to mine the
+                    denial argument along with details about the patient, plan
+                    and procedure. Using these fields, we generate a
+                    professional, detailed, human-like claim denial appeal
+                    letter for the patient to use.
                   </CardBody>
                 </Card>
                 <Card className="mx-2">
