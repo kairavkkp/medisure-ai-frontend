@@ -46,7 +46,7 @@ class Letter extends React.Component {
     this.onFileUpload.bind(this)
   }
   onFileUpload = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]
     this.inputSubmit(file)
   }
   async inputSubmit(file) {
@@ -61,7 +61,7 @@ class Letter extends React.Component {
       const data = response.data
       console.log(data)
       this.setState({
-        loading: false
+        loading: false,
       })
       // this.setState({
       //   responseHash: hash,
@@ -95,7 +95,7 @@ class Letter extends React.Component {
                   <CardBody>
                     <Form onSubmit={this.inputSubmit.bind(this)}>
                       <FormGroup row>
-                        <Label for="input-name" tag="h4" lg={labelSize}>
+                        <Label for="srcFile" tag="h4" lg={labelSize}>
                           Upload denial letter
                         </Label>
                         <Col lg={6}>
@@ -125,6 +125,12 @@ class Letter extends React.Component {
                             name="name"
                             id="input-name"
                             placeholder="Alice Smith"
+                            value={this.state.name}
+                            onChange={(e) =>
+                              this.setState({
+                                name: e.target.value,
+                              })
+                            }
                           />
                         </Col>
                       </FormGroup>
@@ -138,6 +144,12 @@ class Letter extends React.Component {
                             name="age"
                             id="input-age"
                             placeholder="34"
+                            value={this.state.age}
+                            onChange={(e) =>
+                              this.setState({
+                                age: e.target.value,
+                              })
+                            }
                           />
                         </Col>
                       </FormGroup>
@@ -154,6 +166,12 @@ class Letter extends React.Component {
                             type="date"
                             name="dateDiagnosis"
                             id="input-date-diagnosis"
+                            value={this.state.dateDiagnosis}
+                            onChange={(e) =>
+                              this.setState({
+                                dateDiagnosis: e.target.value,
+                              })
+                            }
                           />
                         </Col>
                       </FormGroup>
@@ -167,6 +185,12 @@ class Letter extends React.Component {
                             name="treatment"
                             id="input-treatment"
                             placeholder="Complete Decongestive Therapy CDT (Therapy), Specialized Liposuction (Surgery)"
+                            value={this.state.treatment}
+                            onChange={(e) =>
+                              this.setState({
+                                treatment: e.target.value,
+                              })
+                            }
                           />
                         </Col>
                       </FormGroup>
@@ -183,6 +207,12 @@ class Letter extends React.Component {
                             type="date"
                             name="treatmentStart"
                             id="input-treatment-start"
+                            value={this.state.treatmentStart}
+                            onChange={(e) =>
+                              this.setState({
+                                treatmentStart: e.target.value,
+                              })
+                            }
                           />
                         </Col>
                       </FormGroup>
@@ -195,6 +225,12 @@ class Letter extends React.Component {
                             type="date"
                             name="surgeryDate"
                             id="input-surgery-date"
+                            value={this.state.surgeryDate}
+                            onChange={(e) =>
+                              this.setState({
+                                surgeryDate: e.target.value,
+                              })
+                            }
                           />
                         </Col>
                       </FormGroup>
@@ -208,6 +244,12 @@ class Letter extends React.Component {
                             name="condition"
                             id="input-condition"
                             placeholder="Lipedema"
+                            value={this.state.condition}
+                            onChange={(e) =>
+                              this.setState({
+                                condition: e.target.value,
+                              })
+                            }
                           />
                         </Col>
                       </FormGroup>
@@ -225,6 +267,12 @@ class Letter extends React.Component {
                             name="insurancePlan"
                             id="input-insurance-plan"
                             placeholder="Aetna MD Bronze PPO"
+                            value={this.state.insurancePlan}
+                            onChange={(e) =>
+                              this.setState({
+                                insurancePlan: e.target.value,
+                              })
+                            }
                           />
                         </Col>
                       </FormGroup>
@@ -242,6 +290,12 @@ class Letter extends React.Component {
                             name="treatmentHospital"
                             id="input-treatment-hospital"
                             placeholder="San Francisco General Hospital"
+                            value={this.state.treatmentHospital}
+                            onChange={(e) =>
+                              this.setState({
+                                treatmentHospital: e.target.value,
+                              })
+                            }
                           />
                         </Col>
                       </FormGroup>
@@ -259,6 +313,12 @@ class Letter extends React.Component {
                             name="treatmentDoctor"
                             id="input-treatment-doctor"
                             placeholder="Dr. John Smith"
+                            value={this.state.treatmentDoctor}
+                            onChange={(e) =>
+                              this.setState({
+                                treatmentDoctor: e.target.value,
+                              })
+                            }
                           />
                         </Col>
                       </FormGroup>
@@ -272,6 +332,12 @@ class Letter extends React.Component {
                             name="inNetwork"
                             id="input-in-network"
                             className="ml-2"
+                            checked={this.state.inNetwork}
+                            onChange={(e) =>
+                              this.setState({
+                                inNetwork: e.target.checked,
+                              })
+                            }
                           />
                         </Col>
                       </FormGroup>
@@ -285,6 +351,12 @@ class Letter extends React.Component {
                             name="state"
                             id="input-state"
                             placeholder="CA"
+                            value={this.state.state}
+                            onChange={(e) =>
+                              this.setState({
+                                state: e.target.value,
+                              })
+                            }
                           />
                         </Col>
                       </FormGroup>
@@ -302,6 +374,12 @@ class Letter extends React.Component {
                             name="lifeThreatening"
                             id="input-life-threatening"
                             className="ml-2"
+                            checked={this.state.lifeThreatening}
+                            onChange={(e) =>
+                              this.setState({
+                                lifeThreatening: e.target.checked,
+                              })
+                            }
                           />
                         </Col>
                       </FormGroup>
@@ -319,6 +397,12 @@ class Letter extends React.Component {
                             name="reasonDenial"
                             id="input-reason-denial"
                             placeholder="Considered cosmetic treatment"
+                            value={this.state.reasonDenial}
+                            onChange={(e) =>
+                              this.setState({
+                                reasonDenial: e.target.value,
+                              })
+                            }
                           />
                         </Col>
                       </FormGroup>
