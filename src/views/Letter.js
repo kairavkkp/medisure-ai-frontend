@@ -44,6 +44,7 @@ class Letter extends React.Component {
     this.state = {
       fileLoading: false,
       formLoading: false,
+      responseLetter: ""
     }
     this.onFileUpload.bind(this)
   }
@@ -97,7 +98,7 @@ class Letter extends React.Component {
       console.log(this.state)
     } else {
       this.setState({
-        fileLoading: false,
+        fileLoading: false
       })
     }
     console.log("Done")
@@ -111,15 +112,18 @@ class Letter extends React.Component {
     const formData = new FormData();
     for (let key of Object.keys(this.state)) {
       // Skip loading states
-      if (["fileLoading", "formLoading"].includes(key)) {
+      if (["fileLoading", "formLoading", "responseLetter"].includes(key)) {
         continue;
       }
+      console.log("Appending", key, this.state[key])
       formData.append(key, this.state[key]);
     }
-    axios.post(URL + "/generate", formData)
+    const response = await axios.post(URL + "/generate", formData)
     this.setState({
       formLoading: false,
+      responseLetter: response.data
     })
+    console.log(response.data);
   }
   render() {
     const labelSize = 4
@@ -452,8 +456,12 @@ class Letter extends React.Component {
                     </Row>
                   </CardHeader>
                   <CardBody>
-                    <div className="border border-primary rounded p-3 text-light">
-                      Lorem ipsum dolor sit amet
+                    <div className="border border-primary rounded p-3 text-dark">
+                      { 
+                        this.state.responseLetter.split("\n").map(line => {
+                          return <p>{line}</p>
+                        })
+                      }
                     </div>
                   </CardBody>
                 </Card>
