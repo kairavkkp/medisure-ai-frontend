@@ -15,12 +15,12 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import axios from "axios"
-import FormData from "form-data"
-import React from "react"
-import ReactDOM from "react-dom"
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import FormData from "form-data";
+import React from "react";
+import ReactDOM from "react-dom";
 // reactstrap components
 import {
   Button,
@@ -34,13 +34,13 @@ import {
   FormGroup,
   Input,
   Row,
-} from "reactstrap"
+} from "reactstrap";
 
-const URL = "https://pennapps-2020-289305.ue.r.appspot.com/gpt3"
+const URL = "https://backend-nlstr4buia-uc.a.run.app/vision";
 
 class Home extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       srcText: "",
       qText: "",
@@ -59,20 +59,26 @@ class Home extends React.Component {
   onFileUpload = (e) => {
     this.setState({
       srcFile: e.target.files[0],
-    })
-  }
-  inputSubmit(e) {
-    e.preventDefault()
-    console.log(this.state)
-    const formData = new FormData()
+    });
+  };
+
+  async inputSubmit(e) {
+    e.preventDefault();
+    console.log(this.state);
+    const formData = new FormData();
     // Send file
     if (this.state.srcFile) {
-      formData.append("file", this.state.srcFile)
+      formData.append("file", this.state.srcFile);
     } else {
-      formData.append("text", this.state.srcText)
+      formData.append("text", this.state.srcText);
     }
-    axios.post(URL, formData)
+    const response = await axios.post(URL, formData);
+    const hash = response.data;
+    this.setState({
+      responseHash: hash
+    })
   }
+
   askSubmit(e) {
     e.preventDefault()
     if (this.state.qText) {
@@ -100,6 +106,7 @@ class Home extends React.Component {
       })
     }
   }
+
   render() {
     return (
       <>
@@ -109,9 +116,9 @@ class Home extends React.Component {
               <CardDeck lg="6">
                 <Card>
                   <CardHeader>
-                    <h5 className="card-category">Input</h5>
-                    <CardTitle tag="h3">
-                      <i className="tim-icons icon-double-right text-success" />
+                    <h5 className='card-category'>Input</h5>
+                    <CardTitle tag='h3'>
+                      <i className='tim-icons icon-double-right text-success' />
                       Source Text
                     </CardTitle>
                   </CardHeader>
@@ -119,21 +126,13 @@ class Home extends React.Component {
                     <Form onSubmit={this.inputSubmit.bind(this)}>
                       <FormGroup>
                         <Input
-                          type="textarea"
-                          name="srcText"
-                          id="inputText"
-                          size="50vh"
-                          className="border border-dark"
-                          onChange={this.onChange}
-                        />
-                        <Input
-                          type="file"
-                          name="srcFile"
-                          id="srcFile"
-                          className="mt-2"
+                          type='file'
+                          name='srcFile'
+                          id='srcFile'
+                          className='mt-2'
                           onChange={this.onFileUpload}
                         />
-                        <Button type="submit" className="btn btn-success">
+                        <Button type='submit' className='btn btn-success'>
                           Submit
                         </Button>
                       </FormGroup>
@@ -142,14 +141,14 @@ class Home extends React.Component {
                 </Card>
                 <Card>
                   <CardHeader>
-                    <h5 className="card-category">Output</h5>
-                    <CardTitle tag="h3">
-                      <i className="tim-icons icon-double-right text-primary" />{" "}
+                    <h5 className='card-category'>Output</h5>
+                    <CardTitle tag='h3'>
+                      <i className='tim-icons icon-double-right text-primary' />{" "}
                       Summary
                     </CardTitle>
                   </CardHeader>
                   <CardBody>
-                    <div className="border border-primary rounded p-3 text-light">
+                    <div className='border border-primary rounded p-3 text-light'>
                       Lorem ipsum dolor sit amet
                     </div>
                   </CardBody>
@@ -226,8 +225,8 @@ class Home extends React.Component {
           </Row>
         </div>
       </>
-    )
+    );
   }
 }
 
-export default Home
+export default Home;
