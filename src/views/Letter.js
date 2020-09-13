@@ -118,21 +118,12 @@ class Letter extends React.Component {
       console.log("Appending", key, this.state[key])
       formData.append(key, this.state[key]);
     }
-<<<<<<< HEAD
     const response = await axios.post(URL + "/generate", formData)
     this.setState({
       formLoading: false,
       responseLetter: response.data
     })
     console.log(response.data);
-=======
-    console.log("post");
-    const response = await axios.post(URL + "/generate", formData);
-    this.setState({
-      formLoading: false,
-    });
-    console.log(response);
->>>>>>> 9ff9ec2f34639a4b63f090c9ac826609dac42047
   }
   render() {
     const labelSize = 4;
@@ -465,17 +456,12 @@ class Letter extends React.Component {
                     </Row>
                   </CardHeader>
                   <CardBody>
-<<<<<<< HEAD
                     <div className="border border-primary rounded p-3 text-dark">
                       { 
                         this.state.responseLetter.split("\n").map(line => {
                           return <p>{line}</p>
                         })
                       }
-=======
-                    <div className='border border-primary rounded p-3 text-light'>
-                      Lorem ipsum dolor sit amet
->>>>>>> 9ff9ec2f34639a4b63f090c9ac826609dac42047
                     </div>
                   </CardBody>
                 </Card>
