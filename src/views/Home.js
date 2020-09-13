@@ -17,7 +17,7 @@
 */
 import React from "react"
 // reactstrap components
-import { Card, CardHeader, CardTitle, Col, Row } from "reactstrap"
+import { Card, CardHeader, CardTitle, CardBody, Col, Row } from "reactstrap"
 
 class Home extends React.Component {
   constructor(props) {
@@ -35,12 +35,18 @@ class Home extends React.Component {
     return (
       <>
         <div className="content">
-          <Row lg="12">
-            <Col lg="12">
-              <Card>
+          <Row lg="12" className="justify-content-lg-center">
+            <Col lg="5">
+              <Card className="mx-auto">
                 <CardHeader>
                   <CardTitle tag="h3">MedInsure.ai</CardTitle>
                 </CardHeader>
+                <hr/>
+                <CardBody>
+                  MedInsure is an AI-powered platform that summarizes
+                  hard-to-understand medical insurance policies and documents, 
+                  helping you make more informed decisions. 
+                </CardBody>
               </Card>
             </Col>
           </Row>
