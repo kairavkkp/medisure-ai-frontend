@@ -117,7 +117,7 @@ class App extends React.Component {
             bgColor={this.state.backgroundColor}
             logo={{
               outterLink: "https://www.creative-tim.com/",
-              text: "MedInsure.ai",
+              text: "Medisure.ai",
               imgSrc: logo,
             }}
             toggleSidebar={this.toggleSidebar}

@@ -44,14 +44,16 @@ class Home extends React.Component {
       <>
         <div className="content">
           <Row lg="6" className="justify-content-lg-center">
-            <Col lg="5">
+            <Col lg="12">
               <Card className="mx-auto">
                 <CardHeader>
-                  <CardTitle tag="h3">MedInsure.ai</CardTitle>
+                  <CardTitle tag="h3" className="text-center">
+                    Medisure.ai
+                  </CardTitle>
                 </CardHeader>
                 <hr />
-                <CardBody>
-                  MedInsure provides a suite of NLP-powered tools to help
+                <CardBody className="text-center">
+                  Medisure provides a suite of NLP-powered tools to help
                   demystify medical insurance and help word legal claim appeals.
                 </CardBody>
               </Card>
@@ -67,13 +69,15 @@ class Home extends React.Component {
                     </CardTitle>
                   </CardHeader>
                   <hr />
-                  <CardBody>
+                  <CardBody className="">
                     <ul>
-                      <li>
+                      <li style={{ color: "#525f7f" }}>
                         Upload a plan document (e.g. Aetna Bronze, Cigma MD PPO)
                       </li>
-                      <li>Google Cloud Vision API extracts tables</li>
-                      <li>
+                      <li style={{ color: "#525f7f" }}>
+                        Google Cloud Vision API extracts tables
+                      </li>
+                      <li style={{ color: "#525f7f" }}>
                         Google DialogFlow enables users to query in natural
                         language, GPT-3 extracts response
                       </li>
@@ -87,7 +91,7 @@ class Home extends React.Component {
                     </CardTitle>
                   </CardHeader>
                   <hr />
-                  <CardBody>
+                  <CardBody className="">
                     Enter your treatment details and reason of claim denial.
                     Based on your condition, we generate a customized insurance
                     claim denial appeal letter with correct legal language
@@ -100,7 +104,7 @@ class Home extends React.Component {
                     </CardTitle>
                   </CardHeader>
                   <hr />
-                  <CardBody>
+                  <CardBody className="">
                     Medical insurance policy documents are often highly
                     convoluted and full of uncommon legal vocabulary. Sometimes,
                     you may need to dive deep into these to gain more
@@ -113,16 +117,24 @@ class Home extends React.Component {
               </CardDeck>
             </Col>
           </Row>
-          <Row lg="6" className="justify-content-lg-center mt-3">
-            <Col lg="5">
+          <Row lg="6" className="justify-content-lg-center mt-4">
+            <Col lg="12">
               <Card className="mx-auto">
-                <CardHeader>
-                  <CardTitle tag="h3">MedInsure.ai</CardTitle>
+                <CardHeader className="justify-content-center">
+                  <CardTitle tag="h3" className="text-center">
+                    Developers
+                  </CardTitle>
                 </CardHeader>
                 <hr />
-                <CardBody>
-                  MedInsure provides a suite of NLP-powered tools to help
-                  demystify medical insurance and help word legal claim appeals.
+                <CardBody className="text-center">
+                  Abhijit Gupta
+                  <br />
+                  Gram Liu
+                  <br />
+                  Jaidev Shah
+                  <br />
+                  Shivay Lamba
+                  <br />
                 </CardBody>
               </Card>
             </Col>
