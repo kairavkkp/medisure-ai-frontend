@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react"
+import React from "react";
 // reactstrap components
 import {
   Button,
@@ -31,16 +31,16 @@ import {
   Row,
   Label,
   Spinner,
-} from "reactstrap"
-import axios from "axios"
-import FormData from "form-data"
+} from "reactstrap";
+import axios from "axios";
+import FormData from "form-data";
 
 // const URL = "http://localhost:5000/denial";
-const URL = "https://backend-nlstr4buia-uc.a.run.app/denial"
+const URL = "https://backend-nlstr4buia-uc.a.run.app/denial";
 
 class Letter extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       fileLoading: false,
       formLoading: false,
@@ -49,24 +49,24 @@ class Letter extends React.Component {
     this.onFileUpload.bind(this)
   }
   onFileUpload = (e) => {
-    const file = e.target.files[0]
-    this.inputSubmit(file)
-  }
+    const file = e.target.files[0];
+    this.inputSubmit(file);
+  };
   async inputSubmit(file) {
     this.setState({
       fileLoading: true,
-    })
+    });
     // Send file
     if (file) {
-      const formData = new FormData()
-      formData.append("file", file)
-      const response = await axios.post(URL, formData)
-      const data = response.data
-      console.log(data)
+      const formData = new FormData();
+      formData.append("file", file);
+      const response = await axios.post(URL, formData);
+      const data = response.data;
+      console.log(data);
       function parseDate(dateString) {
         const date = new Date(dateString);
         const yyyy = date.getFullYear();
-        let mm = date.getMonth()
+        let mm = date.getMonth();
         if (mm < 10) {
           mm = "0" + mm;
         }
@@ -94,20 +94,20 @@ class Letter extends React.Component {
         state: data["Patient Plan State"],
         lifeThreatening: data["Life-threatening urgency"],
         reasonDenial: data["Reason"],
-      })
-      console.log(this.state)
+      });
+      console.log(this.state);
     } else {
       this.setState({
         fileLoading: false
       })
     }
-    console.log("Done")
+    console.log("Done");
   }
   async formSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
     this.setState({
       formLoading: true,
-    })
+    });
     console.log(this.state);
     const formData = new FormData();
     for (let key of Object.keys(this.state)) {
@@ -118,62 +118,71 @@ class Letter extends React.Component {
       console.log("Appending", key, this.state[key])
       formData.append(key, this.state[key]);
     }
+<<<<<<< HEAD
     const response = await axios.post(URL + "/generate", formData)
     this.setState({
       formLoading: false,
       responseLetter: response.data
     })
     console.log(response.data);
+=======
+    console.log("post");
+    const response = await axios.post(URL + "/generate", formData);
+    this.setState({
+      formLoading: false,
+    });
+    console.log(response);
+>>>>>>> 9ff9ec2f34639a4b63f090c9ac826609dac42047
   }
   render() {
-    const labelSize = 4
-    const inputSize = 8
+    const labelSize = 4;
+    const inputSize = 8;
     return (
       <>
-        <div className="content">
-          <Row lg="12">
-            <Col lg="12">
-              <CardDeck lg="6">
+        <div className='content'>
+          <Row lg='12'>
+            <Col lg='12'>
+              <CardDeck lg='6'>
                 <Card>
                   <CardHeader>
-                    <CardTitle tag="h3">
-                      <i className="tim-icons icon-double-right text-success" />
+                    <CardTitle tag='h3'>
+                      <i className='tim-icons icon-double-right text-success' />
                       Information
                     </CardTitle>
                   </CardHeader>
                   <CardBody>
                     <Form onSubmit={this.inputSubmit.bind(this)}>
                       <FormGroup row>
-                        <Label for="srcFile" tag="h4" lg={labelSize}>
+                        <Label for='srcFile' tag='h4' lg={labelSize}>
                           Upload denial letter
                         </Label>
                         <Col lg={6}>
                           <Input
-                            type="file"
-                            name="srcFile"
-                            id="srcFile"
-                            className="mt-2"
+                            type='file'
+                            name='srcFile'
+                            id='srcFile'
+                            className='mt-2'
                             onChange={this.onFileUpload}
                           />
                         </Col>
                         <Col lg={1}>
                           {this.state.fileLoading ? (
-                            <Spinner color="light" className="mt-2" />
+                            <Spinner color='light' className='mt-2' />
                           ) : null}
                         </Col>
                       </FormGroup>
                     </Form>
                     <Form onSubmit={this.formSubmit.bind(this)}>
                       <FormGroup row>
-                        <Label for="input-name" tag="h4" lg={labelSize}>
+                        <Label for='input-name' tag='h4' lg={labelSize}>
                           Patient Name
                         </Label>
                         <Col lg={inputSize}>
                           <Input
-                            type="text"
-                            name="name"
-                            id="input-name"
-                            placeholder="Alice Smith"
+                            type='text'
+                            name='name'
+                            id='input-name'
+                            placeholder='Alice Smith'
                             value={this.state.name}
                             onChange={(e) =>
                               this.setState({
@@ -184,15 +193,15 @@ class Letter extends React.Component {
                         </Col>
                       </FormGroup>
                       <FormGroup row>
-                        <Label for="input-age" tag="h4" lg={labelSize}>
+                        <Label for='input-age' tag='h4' lg={labelSize}>
                           Patient Age
                         </Label>
                         <Col lg={inputSize}>
                           <Input
-                            type="text"
-                            name="age"
-                            id="input-age"
-                            placeholder="34"
+                            type='text'
+                            name='age'
+                            id='input-age'
+                            placeholder='34'
                             value={this.state.age}
                             onChange={(e) =>
                               this.setState({
@@ -204,17 +213,17 @@ class Letter extends React.Component {
                       </FormGroup>
                       <FormGroup row>
                         <Label
-                          for="input-date-diagnosis"
-                          tag="h4"
+                          for='input-date-diagnosis'
+                          tag='h4'
                           lg={labelSize}
                         >
                           Date of Diagnosis
                         </Label>
                         <Col lg={inputSize}>
                           <Input
-                            type="date"
-                            name="dateDiagnosis"
-                            id="input-date-diagnosis"
+                            type='date'
+                            name='dateDiagnosis'
+                            id='input-date-diagnosis'
                             value={this.state.dateDiagnosis}
                             onChange={(e) =>
                               this.setState({
@@ -225,15 +234,15 @@ class Letter extends React.Component {
                         </Col>
                       </FormGroup>
                       <FormGroup row>
-                        <Label for="input-treatment" tag="h4" lg={labelSize}>
+                        <Label for='input-treatment' tag='h4' lg={labelSize}>
                           Treatment
                         </Label>
                         <Col lg={inputSize}>
                           <Input
-                            type="text"
-                            name="treatment"
-                            id="input-treatment"
-                            placeholder="Complete Decongestive Therapy CDT (Therapy), Specialized Liposuction (Surgery)"
+                            type='text'
+                            name='treatment'
+                            id='input-treatment'
+                            placeholder='Complete Decongestive Therapy CDT (Therapy), Specialized Liposuction (Surgery)'
                             value={this.state.treatment}
                             onChange={(e) =>
                               this.setState({
@@ -245,17 +254,17 @@ class Letter extends React.Component {
                       </FormGroup>
                       <FormGroup row>
                         <Label
-                          for="input-treatment-start"
-                          tag="h4"
+                          for='input-treatment-start'
+                          tag='h4'
                           lg={labelSize}
                         >
                           Start of Treatment
                         </Label>
                         <Col lg={inputSize}>
                           <Input
-                            type="date"
-                            name="treatmentStart"
-                            id="input-treatment-start"
+                            type='date'
+                            name='treatmentStart'
+                            id='input-treatment-start'
                             value={this.state.treatmentStart}
                             onChange={(e) =>
                               this.setState({
@@ -266,15 +275,15 @@ class Letter extends React.Component {
                         </Col>
                       </FormGroup>
                       <FormGroup row>
-                        <Label for="input-condition" tag="h4" lg={labelSize}>
+                        <Label for='input-condition' tag='h4' lg={labelSize}>
                           Condition
                         </Label>
                         <Col lg={inputSize}>
                           <Input
-                            type="text"
-                            name="condition"
-                            id="input-condition"
-                            placeholder="Lipedema"
+                            type='text'
+                            name='condition'
+                            id='input-condition'
+                            placeholder='Lipedema'
                             value={this.state.condition}
                             onChange={(e) =>
                               this.setState({
@@ -286,18 +295,18 @@ class Letter extends React.Component {
                       </FormGroup>
                       <FormGroup row>
                         <Label
-                          for="input-insurance-plan"
-                          tag="h4"
+                          for='input-insurance-plan'
+                          tag='h4'
                           lg={labelSize}
                         >
                           Insurance Plan
                         </Label>
                         <Col lg={inputSize}>
                           <Input
-                            type="text"
-                            name="insurancePlan"
-                            id="input-insurance-plan"
-                            placeholder="Aetna MD Bronze PPO"
+                            type='text'
+                            name='insurancePlan'
+                            id='input-insurance-plan'
+                            placeholder='Aetna MD Bronze PPO'
                             value={this.state.insurancePlan}
                             onChange={(e) =>
                               this.setState({
@@ -309,18 +318,18 @@ class Letter extends React.Component {
                       </FormGroup>
                       <FormGroup row>
                         <Label
-                          for="input-treatment-hospital"
-                          tag="h4"
+                          for='input-treatment-hospital'
+                          tag='h4'
                           lg={labelSize}
                         >
                           Treatment Hospital
                         </Label>
                         <Col lg={inputSize}>
                           <Input
-                            type="text"
-                            name="treatmentHospital"
-                            id="input-treatment-hospital"
-                            placeholder="San Francisco General Hospital"
+                            type='text'
+                            name='treatmentHospital'
+                            id='input-treatment-hospital'
+                            placeholder='San Francisco General Hospital'
                             value={this.state.treatmentHospital}
                             onChange={(e) =>
                               this.setState({
@@ -332,18 +341,18 @@ class Letter extends React.Component {
                       </FormGroup>
                       <FormGroup row>
                         <Label
-                          for="input-treatment-doctor"
-                          tag="h4"
+                          for='input-treatment-doctor'
+                          tag='h4'
                           lg={labelSize}
                         >
                           Treatment Doctor
                         </Label>
                         <Col lg={inputSize}>
                           <Input
-                            type="text"
-                            name="treatmentDoctor"
-                            id="input-treatment-doctor"
-                            placeholder="Dr. John Smith"
+                            type='text'
+                            name='treatmentDoctor'
+                            id='input-treatment-doctor'
+                            placeholder='Dr. John Smith'
                             value={this.state.treatmentDoctor}
                             onChange={(e) =>
                               this.setState({
@@ -354,15 +363,15 @@ class Letter extends React.Component {
                         </Col>
                       </FormGroup>
                       <FormGroup row>
-                        <Label for="input-in-network" tag="h4" lg={labelSize}>
+                        <Label for='input-in-network' tag='h4' lg={labelSize}>
                           In network treatment provider?
                         </Label>
-                        <Col lg={inputSize} className="my-3">
+                        <Col lg={inputSize} className='my-3'>
                           <Input
-                            type="checkbox"
-                            name="inNetwork"
-                            id="input-in-network"
-                            className="ml-2"
+                            type='checkbox'
+                            name='inNetwork'
+                            id='input-in-network'
+                            className='ml-2'
                             checked={this.state.inNetwork}
                             onChange={(e) =>
                               this.setState({
@@ -373,15 +382,15 @@ class Letter extends React.Component {
                         </Col>
                       </FormGroup>
                       <FormGroup row>
-                        <Label for="input-state" tag="h4" lg={labelSize}>
+                        <Label for='input-state' tag='h4' lg={labelSize}>
                           State
                         </Label>
                         <Col lg={inputSize}>
                           <Input
-                            type="text"
-                            name="state"
-                            id="input-state"
-                            placeholder="CA"
+                            type='text'
+                            name='state'
+                            id='input-state'
+                            placeholder='CA'
                             value={this.state.state}
                             onChange={(e) =>
                               this.setState({
@@ -393,18 +402,18 @@ class Letter extends React.Component {
                       </FormGroup>
                       <FormGroup row>
                         <Label
-                          for="input-life-threatening"
-                          tag="h4"
+                          for='input-life-threatening'
+                          tag='h4'
                           lg={labelSize}
                         >
                           Life-threatening Condition?
                         </Label>
-                        <Col lg={inputSize} className="my-3">
+                        <Col lg={inputSize} className='my-3'>
                           <Input
-                            type="checkbox"
-                            name="lifeThreatening"
-                            id="input-life-threatening"
-                            className="ml-2"
+                            type='checkbox'
+                            name='lifeThreatening'
+                            id='input-life-threatening'
+                            className='ml-2'
                             checked={this.state.lifeThreatening}
                             onChange={(e) =>
                               this.setState({
@@ -416,18 +425,18 @@ class Letter extends React.Component {
                       </FormGroup>
                       <FormGroup row>
                         <Label
-                          for="input-reason-denial"
-                          tag="h4"
+                          for='input-reason-denial'
+                          tag='h4'
                           lg={labelSize}
                         >
                           Reason for Denial
                         </Label>
                         <Col lg={inputSize}>
                           <Input
-                            type="text"
-                            name="reasonDenial"
-                            id="input-reason-denial"
-                            placeholder="Considered cosmetic treatment"
+                            type='text'
+                            name='reasonDenial'
+                            id='input-reason-denial'
+                            placeholder='Considered cosmetic treatment'
                             value={this.state.reasonDenial}
                             onChange={(e) =>
                               this.setState({
@@ -437,7 +446,7 @@ class Letter extends React.Component {
                           />
                         </Col>
                       </FormGroup>
-                      <Button type="submit" className="btn btn-success">
+                      <Button type='submit' className='btn btn-success'>
                         Generate
                       </Button>
                     </Form>
@@ -446,22 +455,27 @@ class Letter extends React.Component {
                 <Card>
                   <CardHeader>
                     <Row>
-                      <CardTitle tag="h3" className="ml-3">
-                        <i className="tim-icons icon-double-right text-primary" />
+                      <CardTitle tag='h3' className='ml-3'>
+                        <i className='tim-icons icon-double-right text-primary' />
                         Denial Appeal Letter
                       </CardTitle>
                       {this.state.formLoading ? (
-                        <Spinner color="light" className="mt-2 ml-lg-5" />
+                        <Spinner color='light' className='mt-2 ml-lg-5' />
                       ) : null}
                     </Row>
                   </CardHeader>
                   <CardBody>
+<<<<<<< HEAD
                     <div className="border border-primary rounded p-3 text-dark">
                       { 
                         this.state.responseLetter.split("\n").map(line => {
                           return <p>{line}</p>
                         })
                       }
+=======
+                    <div className='border border-primary rounded p-3 text-light'>
+                      Lorem ipsum dolor sit amet
+>>>>>>> 9ff9ec2f34639a4b63f090c9ac826609dac42047
                     </div>
                   </CardBody>
                 </Card>
@@ -470,8 +484,8 @@ class Letter extends React.Component {
           </Row>
         </div>
       </>
-    )
+    );
   }
 }
 
-export default Letter
+export default Letter;
