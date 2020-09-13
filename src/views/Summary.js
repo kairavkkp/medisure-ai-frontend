@@ -36,7 +36,8 @@ import {
   Row,
 } from "reactstrap";
 
-const URL = "https://backend-nlstr4buia-uc.a.run.app/vision";
+const URL = "http://localhost:5000/vision";
+// const URL = "https://backend-nlstr4buia-uc.a.run.app/vision";
 
 class Home extends React.Component {
   constructor(props) {
@@ -46,16 +47,16 @@ class Home extends React.Component {
       qText: "",
       responseHash: "",
       messages: [],
-    }
-    this.askForm = null
-    this.onChange.bind(this)
-    this.onFileUpload.bind(this)
+    };
+    this.askForm = null;
+    this.onChange.bind(this);
+    this.onFileUpload.bind(this);
   }
   onChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
   onFileUpload = (e) => {
     this.setState({
       srcFile: e.target.files[0],
@@ -75,45 +76,45 @@ class Home extends React.Component {
     const response = await axios.post(URL, formData);
     const hash = response.data;
     this.setState({
-      responseHash: hash
-    })
+      responseHash: hash,
+    });
   }
 
   askSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
     if (this.state.qText) {
       const message = {
         user: true,
         message: this.state.qText,
-      }
+      };
       const altMessage = {
         ...message,
-        user: false
-      }
+        user: false,
+      };
       this.setState({
         messages: [...this.state.messages, message, altMessage],
-      })
+      });
       if (this.askForm) {
-        ReactDOM.findDOMNode(this.askForm).reset()
+        ReactDOM.findDOMNode(this.askForm).reset();
       }
       // Send query
-      const formData = new FormData()
-      formData.append("query", this.state.qText)
-      formData.append("hash", this.state.responseHash)
-      axios.post(URL, formData)
+      const formData = new FormData();
+      formData.append("query", this.state.qText);
+      formData.append("hash", this.state.responseHash);
+      axios.post(URL, formData);
       this.setState({
-        qText: ""
-      })
+        qText: "",
+      });
     }
   }
 
   render() {
     return (
       <>
-        <div className="content">
-          <Row lg="6">
-            <Col lg="12">
-              <CardDeck lg="6">
+        <div className='content'>
+          <Row lg='6'>
+            <Col lg='12'>
+              <CardDeck lg='6'>
                 <Card>
                   <CardHeader>
                     <h5 className='card-category'>Input</h5>
@@ -156,45 +157,45 @@ class Home extends React.Component {
               </CardDeck>
             </Col>
           </Row>
-          <Row lg="6" className="mt-3 justify-content-lg-center">
-            <Col lg="8">
+          <Row lg='6' className='mt-3 justify-content-lg-center'>
+            <Col lg='8'>
               <Card>
                 <CardHeader>
-                  <h5 className="card-category">Input</h5>
-                  <CardTitle tag="h3">
-                    <i className="tim-icons icon-double-right text-success" />
+                  <h5 className='card-category'>Input</h5>
+                  <CardTitle tag='h3'>
+                    <i className='tim-icons icon-double-right text-success' />
                     Ask
                   </CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <div className="border border-dark rounded p-3 text-light mb-2">
+                  <div className='border border-dark rounded p-3 text-light mb-2'>
                     {this.state.messages.map((message, idx) => {
                       if (message.user) {
                         return (
-                          <Row lg={12} className="justify-content-lg-end">
+                          <Row lg={12} className='justify-content-lg-end'>
                             <Col lg={6}>
                               <div
-                                className="border border-success rounded ml-2 p-2 pl-4 mb-1 text-dark"
+                                className='border border-success rounded ml-2 p-2 pl-4 mb-1 text-dark'
                                 style={{ borderRadius: "30%" }}
                               >
                                 {message.message}
                               </div>
                             </Col>
                           </Row>
-                        )
+                        );
                       } else {
                         return (
-                          <Row lg={12} className="justify-content-lg-start">
+                          <Row lg={12} className='justify-content-lg-start'>
                             <Col lg={6}>
                               <div
-                                className="border border-primary rounded ml-2 p-2 pl-4 mb-1 text-dark"
+                                className='border border-primary rounded ml-2 p-2 pl-4 mb-1 text-dark'
                                 style={{ borderRadius: "30%" }}
                               >
                                 {message.message}
                               </div>
                             </Col>
                           </Row>
-                        )
+                        );
                       }
                     })}
                   </div>
@@ -202,18 +203,18 @@ class Home extends React.Component {
                     onSubmit={this.askSubmit.bind(this)}
                     ref={(form) => (this.askForm = form)}
                   >
-                    <FormGroup className="has-feedback">
+                    <FormGroup className='has-feedback'>
                       <Input
-                        type="text"
-                        name="qText"
-                        id="inputText"
-                        placeholder="Ask GPT-3 anything!"
+                        type='text'
+                        name='qText'
+                        id='inputText'
+                        placeholder='Ask GPT-3 anything!'
                         onChange={this.onChange}
                         innerRef={this.state.qText}
                       />
                       <FontAwesomeIcon
                         icon={faPaperPlane}
-                        className="form-control-feedback text-success"
+                        className='form-control-feedback text-success'
                         onClick={this.askSubmit.bind(this)}
                         style={{ cursor: "pointer" }}
                       />
