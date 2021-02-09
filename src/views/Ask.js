@@ -36,8 +36,8 @@ import {
   Row,
 } from "reactstrap";
 
-// const URL = "http://localhost:5000/summary";
-const URL = "https://backend-nlstr4buia-uc.a.run.app/summary";
+const URL = "http://localhost:5000/summary";
+//const URL = "https://backend-nlstr4buia-uc.a.run.app/summary";
 
 class Ask extends React.Component {
   constructor(props) {

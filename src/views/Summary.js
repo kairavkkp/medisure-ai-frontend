@@ -37,8 +37,8 @@ import {
   Spinner,
 } from "reactstrap";
 
-// const URL = "http://localhost:5000/vision"
-const URL = "https://backend-nlstr4buia-uc.a.run.app/vision";
+const URL = "http://localhost:5000/vision"
+// const URL = "https://backend-nlstr4buia-uc.a.run.app/vision";
 const prefixLen = "output: ".length;
 
 class Home extends React.Component {
