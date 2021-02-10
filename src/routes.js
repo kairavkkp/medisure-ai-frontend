@@ -19,6 +19,8 @@ import Home from "views/Home.js";
 import Summary from "views/Summary.js";
 import Ask from "views/Ask.js";
 import Letter from "views/Letter.js";
+import ContactUs from "views/ContactUs.js";
+import Team from "views/Team.js"
 
 var routes = [
   {
@@ -37,16 +39,30 @@ var routes = [
   },
   {
     path: "/ask",
-    name: "Ask",
-    icon: "tim-icons icon-single-02",
+    name: "Chat Assistant",
+    icon: "tim-icons icon-chat-33",
     component: Ask,
     layout: "",
   },
   {
     path: "/letter",
-    name: "Letter",
+    name: "Appeal",
     icon: "tim-icons icon-bullet-list-67",
     component: Letter,
+    layout: "",
+  },
+  {
+    path: "/contactUs",
+    name: "Contact Us",
+    icon: "tim-icons icon-mobile",
+    component: ContactUs,
+    layout: "",
+  },
+  {
+    path: "/team",
+    name: "Team",
+    icon: "tim-icons icon-single-02",
+    component: Team,
     layout: "",
   },
 ];

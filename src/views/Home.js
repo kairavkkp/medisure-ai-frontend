@@ -44,24 +44,34 @@ class Home extends React.Component {
       <>
         <div className="content">
           <Row lg="6" className="justify-content-lg-center">
-            <Col lg="12">
+            <Col lg="3">
               <Card className="mx-auto">
                 <CardHeader>
                   <CardTitle tag="h3" className="text-center">
-                    Medisure.ai
+                    <strong>Medisure.ai</strong>
                   </CardTitle>
                 </CardHeader>
                 <hr />
-                <CardBody className="text-center">
-                  A consolidated suite of deep-learning powered NLP tools to
-                  help demystify medical insurance and generate insurance claim
-                  denial appeals
+                <CardBody className="text-center" tag="h4">
+                  The GPS of medical insurance.
                 </CardBody>
               </Card>
             </Col>
           </Row>
           <Row lg="6" className="justify-content-lg-center">
+
             <Col lg="12">
+              <Card>
+                <CardHeader className="text-left">
+                  <p><strong>About Us : </strong>
+                  Medisure.ai aims to provide a suite of machine learning powered services that enable patients to demystify and better understand their medical insurance.
+                </p>
+                  <p>
+                    Our current MVP is a suite of deep-learning powered NLP tools, which include:
+                </p>
+                </CardHeader>
+                <br />
+              </Card>
               <CardDeck lg="12">
                 <Card className="mx-2">
                   <CardHeader>
@@ -123,28 +133,6 @@ class Home extends React.Component {
                   </CardBody>
                 </Card>
               </CardDeck>
-            </Col>
-          </Row>
-          <Row lg="6" className="justify-content-lg-center mt-4">
-            <Col lg="12">
-              <Card className="mx-auto">
-                <CardHeader className="justify-content-center">
-                  <CardTitle tag="h3" className="text-center">
-                    Developers
-                  </CardTitle>
-                </CardHeader>
-                <hr />
-                <CardBody className="text-center">
-                  Abhijit Gupta
-                  <br />
-                  Gram Liu
-                  <br />
-                  Jaidev Shah
-                  <br />
-                  Shivay Lamba
-                  <br />
-                </CardBody>
-              </Card>
             </Col>
           </Row>
         </div>
