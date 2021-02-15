@@ -116,7 +116,7 @@ class App extends React.Component {
             routes={routes}
             bgColor={this.state.backgroundColor}
             logo={{
-              outterLink: "https://www.creative-tim.com/",
+              outterLink: "https://medisureai.live/",
               text: "Medisure.ai",
               imgSrc: logo,
             }}

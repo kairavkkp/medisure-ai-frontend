@@ -91,7 +91,7 @@ class Home extends React.Component {
                         document
                       </li>
                       <li style={{ color: "#525f7f" }}>
-                        GPT-3 enables users in natural language and get
+                        We enable users in natural language and get
                         responses customized for their insurance policy
                       </li>
                     </ul>
@@ -108,7 +108,7 @@ class Home extends React.Component {
                     Medisure.ai asks the user to upload the denial notice they
                     received from their insurance provider. Leveraging the
                     Google Cloud Document API, from the converted text, we use a
-                    combination of tf-idf summarization and gpt-3 to mine the
+                    combination of tf-idf summarization and our language model to mine the
                     denial argument along with details about the patient, plan
                     and procedure. Using these fields, we generate a
                     professional, detailed, human-like claim denial appeal
