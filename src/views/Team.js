@@ -97,8 +97,6 @@ class Home extends React.Component {
                   <br />
                   <strong>Gram Liu</strong>
                   <br />
-                  <strong>Jaidev Shah</strong>
-                  <br />
                   <strong>Shivay Lamba</strong>
                   <br />
                 </CardBody>
