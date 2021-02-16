@@ -36,8 +36,7 @@ import {
   Row,
 } from "reactstrap";
 
-// const URL = "http://localhost:5000/summary";
-const URL = "https://backend-nlstr4buia-uc.a.run.app/summary";
+const URL = `${process.env.REACT_APP_HOST_NAME}/summary`;
 
 class Ask extends React.Component {
   constructor(props) {
@@ -96,7 +95,7 @@ class Ask extends React.Component {
                 <CardHeader>
                   <CardTitle tag='h3'>
                     <i className='tim-icons icon-double-right text-success' />
-                    Ask
+                    Medisure.AI Chat Assistant
                   </CardTitle>
                 </CardHeader>
                 <CardBody>

@@ -37,8 +37,7 @@ import {
   Spinner,
 } from "reactstrap";
 
-// const URL = "http://localhost:5000/vision"
-const URL = "https://backend-nlstr4buia-uc.a.run.app/vision";
+const URL = `${process.env.REACT_APP_HOST_NAME}/vision`
 const prefixLen = "output: ".length;
 
 class Home extends React.Component {
@@ -159,7 +158,11 @@ class Home extends React.Component {
                   <CardHeader>
                     <CardTitle tag='h3'>
                       <i className='tim-icons icon-double-right text-success' />
-                      Source Text
+                      Upload SBC PDF
+                    </CardTitle>
+                    <CardTitle tag='h4'>
+                      <i className='tim-icons icon-double-right text-success' />
+                      (Statement of Benefits and Coverage)
                     </CardTitle>
                   </CardHeader>
                   <CardBody>
@@ -193,7 +196,7 @@ class Home extends React.Component {
                     <Row>
                       <CardTitle tag='h3' className='ml-3'>
                         <i className='tim-icons icon-double-right text-primary' />
-                        Summary
+                        SBC Summary
                       </CardTitle>
                       {this.state.summaryLoading ? (
                         <Spinner color='light' className='mt-2 ml-5' />
@@ -215,7 +218,7 @@ class Home extends React.Component {
                 <CardHeader>
                   <CardTitle tag='h3'>
                     <i className='tim-icons icon-double-right text-success' />
-                    Ask
+                    Query Your Plan
                   </CardTitle>
                 </CardHeader>
                 <CardBody>

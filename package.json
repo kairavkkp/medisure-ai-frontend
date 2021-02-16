@@ -1,6 +1,6 @@
 {
-  "name": "black-dashboard-react",
-  "version": "1.1.0",
+  "name": "medisure-ai-frontend",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
@@ -10,6 +10,7 @@
     "@types/react": "16.9.23",
     "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
+    "dotenv": "^8.2.0",
     "form-data": "^3.0.0",
     "history": "4.10.1",
     "node-sass": "4.13.1",
