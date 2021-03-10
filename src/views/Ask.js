@@ -94,7 +94,6 @@ class Ask extends React.Component {
               <Card>
                 <CardHeader>
                   <CardTitle tag='h3'>
-                    <i className='tim-icons icon-double-right text-success' />
                     Medisure.AI Chat Assistant
                   </CardTitle>
                 </CardHeader>
