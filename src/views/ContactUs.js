@@ -57,7 +57,7 @@ class Home extends React.Component {
                     <tbody>
                     <tr>
                       <th>Support Email</th>
-                      <td>info@medisure.ai</td>
+                      <td>info.medisureai@gmail.com</td>
                     </tr>
                     <tr>
                       <th>US</th>

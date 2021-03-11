@@ -24,7 +24,7 @@ import AppLayout from "layouts/App/App.js";
 
 // import 'semantic-ui-css/semantic.min.css'
 import "bootstrap/dist/css/bootstrap.css";
-import "assets/css/now-ui-dashboard.css";
+import "assets/now-ui-scss/now-ui-dashboard.scss";
 import "assets/css/nucleo-icons.css";
 import "assets/css/theme-override.scss";
 
