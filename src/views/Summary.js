@@ -157,13 +157,11 @@ class Home extends React.Component {
                 <Card>
                   <CardHeader>
                     <CardTitle tag='h3'>
-                      <i className='tim-icons icon-double-right text-success' />
                       Upload SBC PDF
                     </CardTitle>
-                    <CardTitle tag='h4'>
-                      <i className='tim-icons icon-double-right text-success' />
+                    <p className="text-secondary">
                       (Statement of Benefits and Coverage)
-                    </CardTitle>
+                    </p>
                   </CardHeader>
                   <CardBody>
                     <Form onSubmit={this.inputSubmit.bind(this)}>
@@ -195,7 +193,6 @@ class Home extends React.Component {
                   <CardHeader>
                     <Row>
                       <CardTitle tag='h3' className='ml-3'>
-                        <i className='tim-icons icon-double-right text-primary' />
                         SBC Summary
                       </CardTitle>
                       {this.state.summaryLoading ? (
@@ -217,8 +214,7 @@ class Home extends React.Component {
               <Card>
                 <CardHeader>
                   <CardTitle tag='h3'>
-                    <i className='tim-icons icon-double-right text-success' />
-                    Query Your Plan
+                   Query Your Plan
                   </CardTitle>
                 </CardHeader>
                 <CardBody>

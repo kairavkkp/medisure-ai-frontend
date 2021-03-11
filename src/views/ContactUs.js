@@ -53,34 +53,20 @@ class Home extends React.Component {
                 </CardHeader>
                 <hr />
                 <CardBody className="text-left">
-                  <table>
-                    <td>
-                      <tr>
-                        <strong>Support Email</strong> : &nbsp;
-                      </tr>
-                      <br />
-                      <tr>
-                        <strong>US</strong> :
+                  <table className="table">
+                    <tbody>
+                    <tr>
+                      <th>Support Email</th>
+                      <td>info.medisureai@gmail.com</td>
                     </tr>
-                      <br />
-                      <tr>
-                        <strong>India</strong> :
+                    <tr>
+                      <th>US</th>
+                      <td>+1 (603) 921-3957</td>
+                    </tr><tr>
+                      <th>India</th>
+                      <td>+91 (999) 88 22287</td>
                     </tr>
-                    </td>
-
-                    <td>
-                      <tr>
-                        info@medisure.ai
-                      </tr>
-                      <br />
-                      <tr>
-                        +1 (603) 921-3957
-                      </tr>
-                      <br />
-                      <tr>
-                        +91 (999) 88 22287
-                          </tr>
-                    </td>
+                    </tbody>
                   </table>
                 </CardBody>
               </Card>
